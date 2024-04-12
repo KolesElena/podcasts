@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {
+  BrowserRouter, Routes, Route,
+} from 'react-router-dom';
 import './index.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import PodcastsList from './pages/PodcastsList/PodcastsList';
+import PodcastsDetails from './pages/PodcastDetails/PodcastDetails';
 
 const queryClient = new QueryClient();
 
@@ -13,7 +17,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<PodcastsList />} />
+          <Route path="/podcasts/:podcastId" element={<PodcastsDetails />} />
+        </Routes>
+      </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>,
 );
