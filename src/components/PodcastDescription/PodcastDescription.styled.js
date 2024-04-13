@@ -15,6 +15,12 @@ export const StyledImage = styled.div`
   width: 100%;
 `;
 
-export const StyledText = styled.div`
-  margin: 10px; 
+export const StyledTitle = styled.div`
+  font-weight: bold;
+  margin: 10px;
+`;
+
+export const StyledAuthor = styled.div`
+  font-style: italic;
+  margin: 10px;
 `;

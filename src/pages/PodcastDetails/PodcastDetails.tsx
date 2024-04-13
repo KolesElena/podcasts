@@ -22,7 +22,7 @@ const PodcastsDetails: React.FC = () => {
           artist={data?.results?.[0].artistName}
           image={data?.results?.[0].artworkUrl100}
         />
-        <EpisodesTable episodes={data?.results} />
+        <EpisodesTable episodes={data?.results} counter={data?.resultCount} />
       </StyledPodcastDetails>
     )
   );
