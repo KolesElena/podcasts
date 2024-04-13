@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, UseQueryResult } from 'react-query';
 import Input from '../../components/Input/Input';
 import Podcast from '../../components/Podcast/Podcast';
-import { StyledPodcasts } from './PodcastsList.styled';
+import { StyledPodcasts, StyledCounter } from './PodcastsList.styled';
 import { getPodcasts } from '../../api';
 
 interface PodcastData {
@@ -28,7 +28,7 @@ const PodcastsList: React.FC = () => {
     getPodcasts,
   );
 
-  const [selectedValue, setSelectedValue] = useState<string | undefined>();
+  const [selectedValue, setSelectedValue] = useState<any>();
 
   const renderPodcast = (podcast: PodcastData) => (
     <Podcast
@@ -40,21 +40,28 @@ const PodcastsList: React.FC = () => {
     />
   );
 
+  const filteredPodcasts = data
+    ?.filter((podcast: PodcastData) => podcast.title.label.includes(selectedValue) || podcast['im:artist'].label.includes(selectedValue));
+
+  const counter = !selectedValue ? data?.length : filteredPodcasts?.length;
+
   const podcastsToShow = !selectedValue ? (
     <StyledPodcasts>
       {data?.map((podcast) => renderPodcast(podcast))}
     </StyledPodcasts>
   ) : (
     <StyledPodcasts>
-      {data
-        ?.filter((podcast) => podcast.title.label.includes(selectedValue) || podcast['im:artist'].label.includes(selectedValue))
+      {filteredPodcasts
         ?.map((podcast) => renderPodcast(podcast))}
     </StyledPodcasts>
   );
 
   return (
     <>
-      <Input onChange={(e) => setSelectedValue(e.target.value)} />
+      <div style={{ display: 'flex', justifyContent: 'end', margin: '30px' }}>
+        <StyledCounter>{counter}</StyledCounter>
+        <Input onChange={(e) => setSelectedValue(e.target.value)} />
+      </div>
       {isFetching ? <p>Loading podcasts...</p> : podcastsToShow}
     </>
   );
