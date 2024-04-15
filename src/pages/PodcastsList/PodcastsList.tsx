@@ -4,6 +4,7 @@ import Input from '../../components/Input/Input';
 import Podcast from '../../components/Podcast/Podcast';
 import { StyledPodcasts, StyledCounter } from './PodcastsList.styled';
 import { getPodcasts } from '../../api';
+import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 
 interface PodcastData {
   id: {
@@ -58,6 +59,7 @@ const PodcastsList: React.FC = () => {
 
   return (
     <>
+      <Breadcrumb />
       <div style={{ display: 'flex', justifyContent: 'end', margin: '30px' }}>
         <StyledCounter>{counter}</StyledCounter>
         <Input onChange={(e) => setSelectedValue(e.target.value)} />
