@@ -6,6 +6,7 @@ import PodcastDescription from '../../components/PodcastDescription/PodcastDescr
 import EpisodesTable from '../../components/EpisodesTable/EpisodesTable';
 import { getPodcastDetails } from '../../api';
 import { StyledPodcastDetails } from './PodcastDetails.styled';
+import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 
 const PodcastsDetails: React.FC = () => {
   const { podcastId } = useParams();
@@ -16,14 +17,17 @@ const PodcastsDetails: React.FC = () => {
 
   return (
     isFetching ? <p>Loading Episodes... </p> : (
-      <StyledPodcastDetails>
-        <PodcastDescription
-          title={data?.results?.[0].trackName}
-          artist={data?.results?.[0].artistName}
-          image={data?.results?.[0].artworkUrl100}
-        />
-        <EpisodesTable episodes={data?.results} counter={data?.resultCount} />
-      </StyledPodcastDetails>
+      <>
+        <Breadcrumb />
+        <StyledPodcastDetails>
+          <PodcastDescription
+            title={data?.results?.[0].trackName}
+            artist={data?.results?.[0].artistName}
+            image={data?.results?.[0].artworkUrl100}
+          />
+          <EpisodesTable episodes={data?.results} counter={data?.resultCount} />
+        </StyledPodcastDetails>
+      </>
     )
   );
 };
