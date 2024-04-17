@@ -1,37 +1,17 @@
-import React, { useState } from 'react';
-import { useQuery, UseQueryResult } from 'react-query';
+import React, { useState, useContext } from 'react';
 import Input from '../../components/Input/Input';
 import Podcast from '../../components/Podcast/Podcast';
 import { StyledPodcasts, StyledCounter } from './PodcastsList.styled';
-import { getPodcasts } from '../../api';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
-
-interface PodcastData {
-  id: {
-    attributes: {
-      'im:id': number;
-    };
-  };
-  title: {
-    label: string;
-  };
-  'im:artist': {
-    label: string;
-  };
-  'im:image': {
-    label: string;
-  }[];
-}
+import { Context } from '../../context/Context';
+import { PodcastListData } from '../../types';
 
 const PodcastsList: React.FC = () => {
-  const { isFetching, data }: UseQueryResult<PodcastData[], unknown> = useQuery(
-    'getPodcasts',
-    getPodcasts,
-  );
+  const { data, isFetching } = useContext(Context);
 
   const [selectedValue, setSelectedValue] = useState<any>();
 
-  const renderPodcast = (podcast: PodcastData) => (
+  const renderPodcast = (podcast: PodcastListData) => (
     <Podcast
       key={podcast.id.attributes['im:id']}
       image={podcast['im:image'][2].label}
@@ -42,7 +22,7 @@ const PodcastsList: React.FC = () => {
   );
 
   const filteredPodcasts = data
-    ?.filter((podcast: PodcastData) => podcast.title.label.includes(selectedValue) || podcast['im:artist'].label.includes(selectedValue));
+    ?.filter((podcast: PodcastListData) => podcast.title.label.includes(selectedValue) || podcast['im:artist'].label.includes(selectedValue));
 
   const counter = !selectedValue ? data?.length : filteredPodcasts?.length;
 
@@ -58,14 +38,20 @@ const PodcastsList: React.FC = () => {
   );
 
   return (
-    <>
-      <Breadcrumb />
-      <div style={{ display: 'flex', justifyContent: 'end', margin: '30px' }}>
-        <StyledCounter>{counter}</StyledCounter>
-        <Input onChange={(e) => setSelectedValue(e.target.value)} />
-      </div>
-      {isFetching ? <p>Loading podcasts...</p> : podcastsToShow}
-    </>
+    isFetching ? <p style={{ textAlign: 'center' }}>Loading podcasts...</p>
+      : (
+        <>
+          <Breadcrumb />
+          <div style={{
+            display: 'flex', justifyContent: 'end', margin: '30px', alignItems: 'center',
+          }}
+          >
+            <StyledCounter>{counter}</StyledCounter>
+            <Input onChange={(e) => setSelectedValue(e.target.value)} />
+          </div>
+          {podcastsToShow}
+        </>
+      )
   );
 };
 
