@@ -28,28 +28,38 @@ const persistData = (dateItemName: string, dataItemName: string, data: object) =
 };
 
 export const getPodcasts = async () => {
-  const persistedData = getPersistedData('date', 'podcasts');
+  try {
+    const persistedData = getPersistedData('date', 'podcasts');
 
-  if (persistedData) {
-    return persistedData?.feed?.entry ?? [];
+    if (persistedData) {
+      return persistedData?.feed?.entry ?? [];
+    }
+    const response = await axios.get<any>(
+      'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json',
+    );
+    persistData('date', 'podcasts', response?.data);
+
+    return response?.data?.feed?.entry ?? [];
+  } catch (error) {
+    console.log(error);
   }
-  const response = await axios.get<any>(
-    'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json',
-  );
-  persistData('date', 'podcasts', response?.data);
-
-  return response?.data?.feed?.entry ?? [];
+  return null;
 };
 
-export const getPodcastDetails = async (id: number) => {
-  const persistedData = getPersistedData(`podcast-date-${id}`, `podcast-${id}`);
-  if (persistedData) {
-    return JSON.parse(persistedData.contents);
-  }
-  const response = await axios.get<any>(
-    enableOrigin(`https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=20`),
-  );
+export const getPodcastDetails = async (id: string | undefined) => {
+  try {
+    const persistedData = getPersistedData(`podcast-date-${id}`, `podcast-${id}`);
+    if (persistedData) {
+      return JSON.parse(persistedData.contents);
+    }
+    const response = await axios.get<any>(
+      enableOrigin(`https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=20`),
+    );
 
-  persistData(`podcast-date-${id}`, `podcast-${id}`, response.data);
-  return JSON.parse(response.data.contents);
+    persistData(`podcast-date-${id}`, `podcast-${id}`, response.data);
+    return JSON.parse(response.data.contents);
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
 };
