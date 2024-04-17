@@ -4,7 +4,7 @@ This is a Podcaster project created with React js.
 
 To start the project directory you should run:
 
-### `npm start:dev`
+### `npm run start:dev`
 
 It will run the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

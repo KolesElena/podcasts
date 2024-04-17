@@ -6,7 +6,7 @@ interface PodcastProps {
   title: string;
   artist: string;
   image: string;
-  podcastId: number;
+  podcastId: string;
 }
 
 const Podcast: React.FC<PodcastProps> = ({

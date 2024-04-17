@@ -12,7 +12,7 @@ export const StyledCounter = styled.span`
   color: white;
   border-radius: 4px;
   padding: 0 5px;
-  height: auto;
+  height: 20px;
   width: 30px;
   text-align: center;
 `;

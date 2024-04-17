@@ -4,12 +4,11 @@ import { useParams } from 'react-router';
 import { Context } from '../../context/Context';
 
 import PodcastDescription from '../../components/PodcastDescription/PodcastDescription';
-import EpisodesTable from '../../components/EpisodesTable/EpisodesTable';
-import { getPodcastDetails } from '../../api';
-import { StyledPodcastDetails } from './PodcastDetails.styled';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
+import { StyledEpisodeDetails } from './EpisodeDetails.styled';
+import { getPodcastDetails } from '../../api';
 
-const PodcastsDetails: React.FC = () => {
+const EpisodeDetails: React.FC = () => {
   const { podcastId } = useParams();
   const { data } = useContext(Context);
   const { isFetching: isFetchingDetails, data: detailsData }: UseQueryResult<any> = useQuery(
@@ -20,25 +19,21 @@ const PodcastsDetails: React.FC = () => {
   const summary = data?.find((podcast) => podcast.id.attributes['im:id'] === podcastId)?.summary.label;
 
   return (
-    isFetchingDetails ? <p style={{ textAlign: 'center' }}>Loading Episodes... </p> : (
+    isFetchingDetails ? <p style={{ textAlign: 'center' }}>Loading Episode... </p> : (
       <>
         <Breadcrumb />
-        <StyledPodcastDetails>
+        <StyledEpisodeDetails>
           <PodcastDescription
             title={detailsData?.results?.[0].trackName}
             artist={detailsData?.results?.[0].artistName}
             image={detailsData?.results?.[0].artworkUrl100}
             description={summary}
           />
-          <EpisodesTable
-            episodes={detailsData?.results}
-            counter={detailsData?.resultCount}
-            podcastId={podcastId}
-          />
-        </StyledPodcastDetails>
+        </StyledEpisodeDetails>
       </>
     )
+
   );
 };
 
-export default PodcastsDetails;
+export default EpisodeDetails;

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const StyledPodcast = styled.div`
   display: block;
-  width: 300px;
-  min-width: 300px;
+  width: 250px;
+  min-width: 250px;
   height: 250px;
   margin: 100px 20px 30px;
   cursor: pointer;
