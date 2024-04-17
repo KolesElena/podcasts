@@ -43,7 +43,7 @@ const EpisodesTable: React.FC<PodcastProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {episodes?.map((row) => (
+            {episodes?.slice(1)?.map((row) => (
               <TableRow
                 key={row.trackId}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

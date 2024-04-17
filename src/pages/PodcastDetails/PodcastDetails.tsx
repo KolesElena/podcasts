@@ -32,7 +32,7 @@ const PodcastsDetails: React.FC = () => {
           />
           <EpisodesTable
             episodes={detailsData?.results}
-            counter={detailsData?.resultCount}
+            counter={Number(detailsData?.resultCount) - 1}
             podcastId={podcastId}
           />
         </StyledPodcastDetails>
