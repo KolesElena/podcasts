@@ -48,7 +48,7 @@ const EpisodesTable: React.FC<PodcastProps> = ({
                 key={row.trackId}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" style={{ color: '#1560BD', cursor: 'pointer' }} scope="row" onClick={() => navigate(`/podcasts/${podcastId}/episodes/${row.trackId}`)}>
+                <TableCell component="th" style={{ color: '#1560BD', cursor: 'pointer' }} scope="row" onClick={() => navigate(`/podcast/${podcastId}/episode/${row.trackId}`)}>
                   {row.trackName}
                 </TableCell>
                 <TableCell>{convertDate(row.releaseDate)}</TableCell>

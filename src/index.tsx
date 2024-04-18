@@ -22,8 +22,8 @@ root.render(
       <ContextProvider>
         <Routes>
           <Route path="/" element={<PodcastsList />} />
-          <Route path="/podcasts/:podcastId" element={<PodcastsDetails />} />
-          <Route path="/podcasts/:podcastId/episodes/:episodeId" element={<EpisodeDetails />} />
+          <Route path="/podcast/:podcastId" element={<PodcastsDetails />} />
+          <Route path="/podcast/:podcastId/episode/:episodeId" element={<EpisodeDetails />} />
         </Routes>
       </ContextProvider>
     </BrowserRouter>
