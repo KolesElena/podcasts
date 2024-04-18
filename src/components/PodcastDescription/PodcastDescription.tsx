@@ -1,7 +1,10 @@
 import React from 'react';
 import {
-  StyledPodcastDescription, StyledImage, StyledText, StyledAuthor, StyledDescription,
+  StyledImage,
 } from './PodcastDescription.styled';
+import {
+  StyledBox, StyledText, StyledAuthor, StyledDescription,
+} from '../../main.styled';
 
 interface PodcastProps {
   title: string;
@@ -13,7 +16,7 @@ interface PodcastProps {
 const PodcastDescription: React.FC<PodcastProps> = ({
   title, artist, image, description,
 }) => (
-  <StyledPodcastDescription>
+  <StyledBox width="300px">
     <StyledImage><img src={image} style={{ borderRadius: '5%', display: 'block', margin: 'auto' }} alt={image} /></StyledImage>
     <StyledText>{title}</StyledText>
     <StyledAuthor>
@@ -25,7 +28,7 @@ const PodcastDescription: React.FC<PodcastProps> = ({
     <StyledDescription>
       {description}
     </StyledDescription>
-  </StyledPodcastDescription>
+  </StyledBox>
 );
 
 export default PodcastDescription;
