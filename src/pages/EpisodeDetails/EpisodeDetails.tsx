@@ -7,16 +7,22 @@ import PodcastDescription from '../../components/PodcastDescription/PodcastDescr
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { StyledEpisodeDetails } from './EpisodeDetails.styled';
 import { getPodcastDetails } from '../../api';
+import EpisodeDescription from '../../components/EpisodeDescription/EpisodeDescription';
 
 const EpisodeDetails: React.FC = () => {
   const { podcastId } = useParams();
+  const { episodeId } = useParams();
   const { data } = useContext(Context);
-  const { isFetching: isFetchingDetails, data: detailsData }: UseQueryResult<any> = useQuery(
-    'getPodcastsDetails',
+  const { isFetching: isFetchingDetails, data: episodesData }: UseQueryResult<any> = useQuery(
+    'getEpisodeDetails',
     () => getPodcastDetails(podcastId),
   );
 
+  const getEpisodeId = Number(episodeId);
+
   const summary = data?.find((podcast) => podcast.id.attributes['im:id'] === podcastId)?.summary.label;
+  const episode = episodesData?.results
+    ?.find((element: any) => element.trackId === getEpisodeId);
 
   return (
     isFetchingDetails ? <p style={{ textAlign: 'center' }}>Loading Episode... </p> : (
@@ -24,10 +30,15 @@ const EpisodeDetails: React.FC = () => {
         <Breadcrumb />
         <StyledEpisodeDetails>
           <PodcastDescription
-            title={detailsData?.results?.[0].trackName}
-            artist={detailsData?.results?.[0].artistName}
-            image={detailsData?.results?.[0].artworkUrl100}
+            title={episodesData?.results?.[0].trackName}
+            artist={episodesData?.results?.[0].artistName}
+            image={episodesData?.results?.[0].artworkUrl100}
             description={summary}
+          />
+          <EpisodeDescription
+            title={episode?.trackName}
+            description={episode?.description}
+            url={episode.episodeUrl}
           />
         </StyledEpisodeDetails>
       </>
