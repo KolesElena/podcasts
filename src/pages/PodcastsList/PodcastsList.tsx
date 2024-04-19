@@ -44,12 +44,12 @@ const PodcastsList: React.FC = () => {
 
   return (
     <>
-      <FlexBox justifyContent="space-between">
+      <FlexBox justifycontent="space-between">
         <Breadcrumb />
         {isFetching && <Loader />}
       </FlexBox>
       <hr style={{ margin: ' 0px 30px' }} />
-      <FlexBox justifyContent="end">
+      <FlexBox justifycontent="end">
         <StyledCounter>{counter}</StyledCounter>
         <Input onChange={(e) => setSelectedValue((e.target.value).toLowerCase())} />
       </FlexBox>

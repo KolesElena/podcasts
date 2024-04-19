@@ -24,7 +24,7 @@ const PodcastsDetails: React.FC = () => {
 
   return (
     <>
-      <FlexBox justifyContent="space-between">
+      <FlexBox justifycontent="space-between">
         <Breadcrumb />
         {isFetchingDetails && <Loader />}
       </FlexBox>
