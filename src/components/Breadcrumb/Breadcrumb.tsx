@@ -7,12 +7,9 @@ const Breadcrumb: React.FC = (
   const navigate = useNavigate();
 
   return (
-    <>
-      <StyledBreadcrumb onClick={() => navigate('/')}>
-        Podcaster
-      </StyledBreadcrumb>
-      <hr style={{ margin: ' 0px 30px' }} />
-    </>
+    <StyledBreadcrumb onClick={() => navigate('/')}>
+      Podcaster
+    </StyledBreadcrumb>
   );
 };
 

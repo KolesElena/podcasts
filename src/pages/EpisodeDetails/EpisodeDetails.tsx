@@ -8,6 +8,7 @@ import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { StyledEpisodeDetails } from './EpisodeDetails.styled';
 import { getPodcastDetails } from '../../api';
 import EpisodeDescription from '../../components/EpisodeDescription/EpisodeDescription';
+import { FlexBox, Loader } from '../../main.styled';
 
 const EpisodeDetails: React.FC = () => {
   const { podcastId } = useParams();
@@ -25,9 +26,13 @@ const EpisodeDetails: React.FC = () => {
     ?.find((element: any) => element.trackId === getEpisodeId);
 
   return (
-    isFetchingDetails ? <p style={{ textAlign: 'center' }}>Loading Episode... </p> : (
-      <>
+    <>
+      <FlexBox justifyContent="space-between">
         <Breadcrumb />
+        {isFetchingDetails && <Loader />}
+      </FlexBox>
+      <hr style={{ margin: ' 0px 30px' }} />
+      {!isFetchingDetails && (
         <StyledEpisodeDetails>
           <PodcastDescription
             title={episodesData?.results?.[0].trackName}
@@ -41,9 +46,8 @@ const EpisodeDetails: React.FC = () => {
             url={episode.episodeUrl}
           />
         </StyledEpisodeDetails>
-      </>
-    )
-
+      )}
+    </>
   );
 };
 

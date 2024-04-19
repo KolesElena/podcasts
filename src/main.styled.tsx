@@ -26,3 +26,18 @@ export const StyledDescription = styled.div`
   font-style: italic;
   margin: 10px;
 `;
+
+export const Loader = styled.div`
+  width: 15px;
+  height: 15px;
+  background: #1560BD;
+  border-radius: 50%;
+  border: 5px solid #A7C7E7;
+`;
+
+export const FlexBox = styled.div<{ justifyContent: string }>`
+  display: flex;
+  justify-content: ${(props) => props.justifyContent};
+  margin: 30px 30px 10px;
+  align-items: center;
+`;
