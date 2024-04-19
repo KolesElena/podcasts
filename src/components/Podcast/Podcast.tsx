@@ -15,11 +15,11 @@ const Podcast: React.FC<PodcastProps> = ({
   const navigate = useNavigate();
 
   return (
-    <StyledPodcast onClick={() => navigate(`/podcast/${podcastId}`)}>
+    <StyledPodcast data-testId="podcast" onClick={() => navigate(`/podcast/${podcastId}`)}>
       <StyledImage><img src={image} style={{ borderRadius: '50%', display: 'block', margin: 'auto' }} alt={image} /></StyledImage>
       <StyledText>
         <div style={{ marginBottom: '10px' }}>{title}</div>
-        <div>
+        <div style={{ fontWeight: '500', color: '#808080' }}>
           Author:
           {' '}
           {artist}

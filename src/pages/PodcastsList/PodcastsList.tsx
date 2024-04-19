@@ -21,8 +21,10 @@ const PodcastsList: React.FC = () => {
     />
   );
 
+  const searchValue = (text: string) => text.toLowerCase().includes(selectedValue);
+
   const filteredPodcasts = data
-    ?.filter((podcast: PodcastListData) => podcast.title.label.includes(selectedValue) || podcast['im:artist'].label.includes(selectedValue));
+    ?.filter((podcast: PodcastListData) => searchValue(podcast.title.label) || searchValue(podcast['im:artist'].label));
 
   const counter = !selectedValue ? data?.length : filteredPodcasts?.length;
 
@@ -47,7 +49,7 @@ const PodcastsList: React.FC = () => {
           }}
           >
             <StyledCounter>{counter}</StyledCounter>
-            <Input onChange={(e) => setSelectedValue(e.target.value)} />
+            <Input onChange={(e) => setSelectedValue((e.target.value).toLowerCase())} />
           </div>
           {podcastsToShow}
         </>

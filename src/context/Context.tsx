@@ -11,7 +11,7 @@ interface ContextData {
 export const Context = createContext<ContextData>({ data: null, isFetching: false });
 
 export const ContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const { isFetching, data = null }: UseQueryResult<PodcastListData[] | null, unknown> = useQuery(
+  const { isFetching, data = null }: UseQueryResult<PodcastListData[] | null> = useQuery(
     'getPodcasts',
     getPodcasts,
   );
