@@ -5,9 +5,12 @@ import { StyledPodcasts, StyledCounter } from './PodcastsList.styled';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { Context } from '../../context/Context';
 import { PodcastListData } from '../../types';
+import { FlexBox, Loader } from '../../main.styled';
 
 const PodcastsList: React.FC = () => {
   const { data, isFetching } = useContext(Context);
+
+  console.log(data);
 
   const [selectedValue, setSelectedValue] = useState<any>();
 
@@ -40,20 +43,18 @@ const PodcastsList: React.FC = () => {
   );
 
   return (
-    isFetching ? <p style={{ textAlign: 'center' }}>Loading podcasts...</p>
-      : (
-        <>
-          <Breadcrumb />
-          <div style={{
-            display: 'flex', justifyContent: 'end', margin: '30px', alignItems: 'center',
-          }}
-          >
-            <StyledCounter>{counter}</StyledCounter>
-            <Input onChange={(e) => setSelectedValue((e.target.value).toLowerCase())} />
-          </div>
-          {podcastsToShow}
-        </>
-      )
+    <>
+      <FlexBox justifyContent="space-between">
+        <Breadcrumb />
+        {isFetching && <Loader />}
+      </FlexBox>
+      <hr style={{ margin: ' 0px 30px' }} />
+      <FlexBox justifyContent="end">
+        <StyledCounter>{counter}</StyledCounter>
+        <Input onChange={(e) => setSelectedValue((e.target.value).toLowerCase())} />
+      </FlexBox>
+      {podcastsToShow}
+    </>
   );
 };
 

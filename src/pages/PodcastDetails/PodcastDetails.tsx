@@ -8,6 +8,7 @@ import EpisodesTable from '../../components/EpisodesTable/EpisodesTable';
 import { getPodcastDetails } from '../../api';
 import { StyledPodcastDetails } from './PodcastDetails.styled';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
+import { FlexBox, Loader } from '../../main.styled';
 
 const PodcastsDetails: React.FC = () => {
   const { podcastId } = useParams();
@@ -17,12 +18,18 @@ const PodcastsDetails: React.FC = () => {
     () => getPodcastDetails(podcastId),
   );
 
+  console.log(detailsData);
+
   const summary = data?.find((podcast) => podcast.id.attributes['im:id'] === podcastId)?.summary.label;
 
   return (
-    isFetchingDetails ? <p style={{ textAlign: 'center' }}>Loading Episodes... </p> : (
-      <>
+    <>
+      <FlexBox justifyContent="space-between">
         <Breadcrumb />
+        {isFetchingDetails && <Loader />}
+      </FlexBox>
+      <hr style={{ margin: ' 0px 30px' }} />
+      {!isFetchingDetails && (
         <StyledPodcastDetails>
           <PodcastDescription
             title={detailsData?.results?.[0].trackName}
@@ -36,8 +43,8 @@ const PodcastsDetails: React.FC = () => {
             podcastId={podcastId}
           />
         </StyledPodcastDetails>
-      </>
-    )
+      )}
+    </>
   );
 };
 
