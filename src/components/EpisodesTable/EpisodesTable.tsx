@@ -28,13 +28,13 @@ const EpisodesTable: React.FC<PodcastProps> = ({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <StyledEpisodesCounter>
-        Episodes:
+      <StyledEpisodesCounter style={{ width: '100%' }}>
+        <span style={{ paddingLeft: '15px' }}>Episodes:</span>
         {' '}
         {counter}
       </StyledEpisodesCounter>
-      <TableContainer component={Paper} style={{ display: 'block' }}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <TableContainer component={Paper} style={{ display: 'block', width: '100%' }}>
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell style={{ fontWeight: 'bold' }}>Title</TableCell>

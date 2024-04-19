@@ -5,5 +5,4 @@ export const StyledBreadcrumb = styled.div`
   color: #1560BD;
   cursor: pointer;
   font-weight: bold;
-  margin: 30px 30px 10px;
 `;
