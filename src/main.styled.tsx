@@ -35,9 +35,9 @@ export const Loader = styled.div`
   border: 5px solid #A7C7E7;
 `;
 
-export const FlexBox = styled.div<{ justifyContent: string }>`
+export const FlexBox = styled.div<{ justifycontent: string }>`
   display: flex;
-  justify-content: ${(props) => props.justifyContent};
+  justify-content: ${(props) => props.justifycontent};
   margin: 30px 30px 10px;
   align-items: center;
 `;
