@@ -30,8 +30,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start:dev": "cross-env webpack serve --config webpack.dev.ts",
+    "start": "cross-env webpack serve --config webpack.dev.ts",
     "build": "webpack --config webpack.dev.ts",
     "build:prod": "webpack --config webpack.prod.ts",
     "test": "react-scripts test",
