@@ -7,9 +7,9 @@ import {
 } from '../../main.styled';
 
 interface PodcastProps {
-  title: string;
-  artist: string;
-  image: string;
+  title: string | undefined;
+  artist: string | undefined;
+  image: string | undefined;
   description: string | undefined;
 }
 

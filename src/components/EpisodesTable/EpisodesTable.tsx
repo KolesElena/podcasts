@@ -9,20 +9,10 @@ import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
 import { convertDate, millisToMinutesAndSeconds } from '../../utils';
 import { StyledEpisodesCounter } from './EpisodesTable.styled';
+import { EpisodeData } from '../../types';
 
-interface PodcastProps {
-  episodes: {
-    trackName: string;
-    trackId: number;
-    releaseDate: string;
-    trackTimeMillis: number;
-  }[],
-  counter: number,
-  podcastId: string | undefined;
-}
-
-const EpisodesTable: React.FC<PodcastProps> = ({
-  episodes, counter, podcastId,
+const EpisodesTable: React.FC<EpisodeData> = ({
+  episodes, podcastId,
 }) => {
   const navigate = useNavigate();
 
@@ -31,7 +21,7 @@ const EpisodesTable: React.FC<PodcastProps> = ({
       <StyledEpisodesCounter style={{ width: '100%' }}>
         <span style={{ paddingLeft: '15px' }}>Episodes:</span>
         {' '}
-        {counter}
+        {Number(episodes?.resultCount) - 1}
       </StyledEpisodesCounter>
       <TableContainer component={Paper} style={{ display: 'block', width: '100%' }}>
         <Table aria-label="simple table">
@@ -43,7 +33,7 @@ const EpisodesTable: React.FC<PodcastProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {episodes?.slice(1)?.map((row) => (
+            {episodes?.results?.slice(1)?.map((row) => (
               <TableRow
                 key={row.trackId}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
