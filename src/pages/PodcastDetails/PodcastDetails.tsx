@@ -9,18 +9,23 @@ import { getPodcastDetails } from '../../api';
 import { StyledPodcastDetails } from './PodcastDetails.styled';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { FlexBox, Loader } from '../../main.styled';
+import { EpisodeData } from '../../types';
+
+interface PropsData {
+  data: EpisodeData[] | null,
+  isFetching: boolean,
+}
 
 const PodcastsDetails: React.FC = () => {
   const { podcastId } = useParams();
   const { data } = useContext(Context);
-  const { isFetching: isFetchingDetails, data: detailsData }: UseQueryResult<any> = useQuery(
+  const { isFetching: isFetchingDetails, data: detailsData }:
+  UseQueryResult<PropsData[] | any> = useQuery(
     'getPodcastsDetails',
     () => getPodcastDetails(podcastId),
   );
 
-  console.log(detailsData);
-
-  const summary = data?.find((podcast) => podcast.id.attributes['im:id'] === podcastId)?.summary.label;
+  const podcastData = data?.find((podcast) => podcast.id.attributes['im:id'] === podcastId);
 
   return (
     <>
@@ -32,16 +37,17 @@ const PodcastsDetails: React.FC = () => {
       {!isFetchingDetails && (
         <StyledPodcastDetails>
           <PodcastDescription
-            title={detailsData?.results?.[0].trackName}
-            artist={detailsData?.results?.[0].artistName}
-            image={detailsData?.results?.[0].artworkUrl100}
-            description={summary}
+            title={podcastData?.title.label}
+            artist={podcastData?.['im:artist'].label}
+            image={podcastData?.['im:image'][2].label}
+            description={podcastData?.summary.label}
           />
-          <EpisodesTable
-            episodes={detailsData?.results}
-            counter={Number(detailsData?.resultCount) - 1}
-            podcastId={podcastId}
-          />
+          {detailsData && (
+            <EpisodesTable
+              episodes={detailsData}
+              podcastId={podcastId}
+            />
+          )}
         </StyledPodcastDetails>
       )}
     </>
