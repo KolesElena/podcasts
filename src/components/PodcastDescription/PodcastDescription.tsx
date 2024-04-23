@@ -3,7 +3,7 @@ import {
   StyledImage,
 } from './PodcastDescription.styled';
 import {
-  StyledBox, StyledText, StyledAuthor, StyledDescription,
+  StyledBox, StyledText, StyledAuthor, StyledDescription, Delimiter,
 } from '../../main.styled';
 
 interface PodcastProps {
@@ -18,12 +18,14 @@ const PodcastDescription: React.FC<PodcastProps> = ({
 }) => (
   <StyledBox width="300px">
     <StyledImage><img src={image} style={{ borderRadius: '5%', display: 'block', margin: 'auto' }} alt={image} /></StyledImage>
+    <Delimiter />
     <StyledText>{title}</StyledText>
     <StyledAuthor>
       by
       {' '}
       {artist}
     </StyledAuthor>
+    <Delimiter />
     <StyledText>Description: </StyledText>
     <StyledDescription>
       {description}
