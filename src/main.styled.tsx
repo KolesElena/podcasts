@@ -41,3 +41,10 @@ export const FlexBox = styled.div<{ justifycontent: string }>`
   margin: 30px 30px 10px;
   align-items: center;
 `;
+
+export const Delimiter = styled.hr<{ margin?: string }>`
+  height: 1px;
+  background: #D3D3D3;
+  border: none;
+  margin: ${(props) => props.margin || '0.5em'};
+`;

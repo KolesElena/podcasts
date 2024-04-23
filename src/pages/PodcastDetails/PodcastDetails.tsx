@@ -8,7 +8,7 @@ import EpisodesTable from '../../components/EpisodesTable/EpisodesTable';
 import { getPodcastDetails } from '../../api';
 import { StyledPodcastDetails } from './PodcastDetails.styled';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
-import { FlexBox, Loader } from '../../main.styled';
+import { FlexBox, Loader, Delimiter } from '../../main.styled';
 import { EpisodeData } from '../../types';
 
 interface PropsData {
@@ -33,7 +33,7 @@ const PodcastsDetails: React.FC = () => {
         <Breadcrumb />
         {isFetchingDetails && <Loader />}
       </FlexBox>
-      <hr style={{ margin: ' 0px 30px' }} />
+      <Delimiter margin="0 1em" />
       {!isFetchingDetails && (
         <StyledPodcastDetails>
           <PodcastDescription
