@@ -11,6 +11,20 @@ const EpisodesTable: React.FC<EpisodeData> = ({
 }) => {
   const navigate = useNavigate();
 
+  const headList = [
+    {
+      id: 1,
+      title: 'Title',
+    },
+    {
+      id: 2,
+      title: 'Date',
+    },
+    {
+      id: 3,
+      title: 'Duration',
+    }];
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <StyledEpisodesCounter>
@@ -19,22 +33,24 @@ const EpisodesTable: React.FC<EpisodeData> = ({
         {Number(episodes?.resultCount) - 1}
       </StyledEpisodesCounter>
       <StyledTable>
-        <StyledRow>
-          <StyledHead>Title</StyledHead>
-          <StyledHead>Date</StyledHead>
-          <StyledHead>Duration</StyledHead>
-        </StyledRow>
-        {episodes?.results?.slice(1)?.map((row) => (
-          <StyledRow
-            key={row.trackId}
-          >
-            <StyledCell onClick={() => navigate(`/podcast/${podcastId}/episode/${row.trackId}`)}>
-              {row.trackName}
-            </StyledCell>
-            <StyledCell>{convertDate(row.releaseDate)}</StyledCell>
-            <StyledCell>{millisToMinutesAndSeconds(row.trackTimeMillis)}</StyledCell>
+        <thead>
+          <StyledRow>
+            {headList.map(({ id, title }) => (<StyledHead key={id}>{title}</StyledHead>))}
           </StyledRow>
-        ))}
+        </thead>
+        <tbody>
+          {episodes?.results?.slice(1)?.map((row) => (
+            <StyledRow
+              key={row.trackId}
+            >
+              <StyledCell onClick={() => navigate(`/podcast/${podcastId}/episode/${row.trackId}`)}>
+                {row.trackName}
+              </StyledCell>
+              <StyledCell>{convertDate(row.releaseDate)}</StyledCell>
+              <StyledCell>{millisToMinutesAndSeconds(row.trackTimeMillis)}</StyledCell>
+            </StyledRow>
+          ))}
+        </tbody>
       </StyledTable>
     </div>
   );
