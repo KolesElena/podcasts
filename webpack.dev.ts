@@ -7,6 +7,7 @@ const { merge } = require('webpack-merge');
    devServer: {
      host: 'localhost',
      port: 3000,
-     watchFiles: ['src/**/*']
+     watchFiles: ['src/**/*'],
+     historyApiFallback: true,
    },
  });
