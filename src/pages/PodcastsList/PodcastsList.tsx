@@ -10,7 +10,7 @@ import { FlexBox, Loader, Delimiter } from '../../main.styled';
 const PodcastsList: React.FC = () => {
   const { data, isFetching } = useContext(Context);
 
-  const [selectedValue, setSelectedValue] = useState<any>();
+  const [selectedValue, setSelectedValue] = useState('');
 
   const renderPodcast = (podcast: PodcastListData) => (
     <Podcast

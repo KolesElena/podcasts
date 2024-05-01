@@ -9,21 +9,20 @@ import { StyledEpisodeDetails } from './EpisodeDetails.styled';
 import { getPodcastDetails } from '../../api';
 import EpisodeDescription from '../../components/EpisodeDescription/EpisodeDescription';
 import { FlexBox, Loader } from '../../main.styled';
+import { Episodes } from '../../types';
 
 const EpisodeDetails: React.FC = () => {
   const { podcastId } = useParams();
   const { episodeId } = useParams();
   const { data } = useContext(Context);
-  const { isFetching: isFetchingDetails, data: episodesData }: UseQueryResult<any> = useQuery(
+  const { isFetching: isFetchingDetails, data: episodesData }: UseQueryResult<Episodes> = useQuery(
     'getEpisodeDetails',
     () => getPodcastDetails(podcastId),
   );
 
-  const getEpisodeId = Number(episodeId);
-
   const summary = data?.find((podcast) => podcast.id.attributes['im:id'] === podcastId)?.summary.label;
   const episode = episodesData?.results
-    ?.find((element: any) => element.trackId === getEpisodeId);
+    ?.find((element) => element.trackId === Number(episodeId));
 
   return (
     <>
@@ -32,19 +31,21 @@ const EpisodeDetails: React.FC = () => {
         {isFetchingDetails && <Loader />}
       </FlexBox>
       <hr style={{ margin: ' 0px 30px' }} />
-      {!isFetchingDetails && (
+      {!isFetchingDetails && episodesData && (
         <StyledEpisodeDetails>
           <PodcastDescription
-            title={episodesData?.results?.[0].trackName}
-            artist={episodesData?.results?.[0].artistName}
-            image={episodesData?.results?.[0].artworkUrl100}
+            title={episodesData.results?.[0].trackName}
+            artist={episodesData.results?.[0].artistName}
+            image={episodesData.results?.[0].artworkUrl100}
             description={summary}
           />
-          <EpisodeDescription
-            title={episode?.trackName}
-            description={episode?.description}
-            url={episode.episodeUrl}
-          />
+          {episode && (
+            <EpisodeDescription
+              title={episode.trackName}
+              description={episode.description}
+              url={episode.episodeUrl}
+            />
+          )}
         </StyledEpisodeDetails>
       )}
     </>

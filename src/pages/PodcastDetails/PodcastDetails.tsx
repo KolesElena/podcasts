@@ -9,18 +9,13 @@ import { getPodcastDetails } from '../../api';
 import { StyledPodcastDetails } from './PodcastDetails.styled';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { FlexBox, Loader, Delimiter } from '../../main.styled';
-import { EpisodeData } from '../../types';
-
-interface PropsData {
-  data: EpisodeData[] | null,
-  isFetching: boolean,
-}
+import { Episodes } from '../../types';
 
 const PodcastsDetails: React.FC = () => {
   const { podcastId } = useParams();
   const { data } = useContext(Context);
   const { isFetching: isFetchingDetails, data: detailsData }:
-  UseQueryResult<PropsData[] | any> = useQuery(
+  UseQueryResult<Episodes> = useQuery(
     'getPodcastsDetails',
     () => getPodcastDetails(podcastId),
   );
@@ -31,7 +26,7 @@ const PodcastsDetails: React.FC = () => {
     <>
       <FlexBox justifycontent="space-between">
         <Breadcrumb />
-        {isFetchingDetails && <Loader />}
+        {isFetchingDetails && <Loader data-testid="loader" />}
       </FlexBox>
       <Delimiter margin="0 1em" />
       {!isFetchingDetails && (
