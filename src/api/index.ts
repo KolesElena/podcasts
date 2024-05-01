@@ -1,5 +1,12 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
+import { PodcastListData, Episodes } from '../types';
+
+type PodcastListResponse = {
+  feed: {
+    entry: PodcastListData[];
+  }
+};
 
 const getPersistedData = (dateItemName: string, dataItemName: string) => {
   const savedDate = localStorage.getItem(dateItemName);
@@ -34,7 +41,7 @@ export const getPodcasts = async () => {
     if (persistedData) {
       return persistedData?.feed?.entry ?? [];
     }
-    const response = await axios.get<any>(
+    const response = await axios.get<PodcastListResponse>(
       'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json',
     );
     persistData('date', 'podcasts', response?.data);
@@ -52,12 +59,12 @@ export const getPodcastDetails = async (id: string | undefined) => {
     if (persistedData) {
       return JSON.parse(persistedData.contents);
     }
-    const response = await axios.get<any>(
-      enableOrigin(`https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode&limit=20`),
+    const response = await axios.get<{ contents: string }>(
+      enableOrigin(`https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`),
     );
 
     persistData(`podcast-date-${id}`, `podcast-${id}`, response.data);
-    return JSON.parse(response.data.contents);
+    return JSON.parse(response.data.contents) as Episodes;
   } catch (error) {
     console.log(error);
   }
