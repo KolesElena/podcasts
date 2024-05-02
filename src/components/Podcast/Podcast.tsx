@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StyledPodcast, StyledImage, StyledText } from './Podcast.styled';
+import {
+  StyledPodcast, StyledImageBox, StyledImage, StyledText, StyledAuthor, StyledTitle,
+} from './Podcast.styled';
 
 interface PodcastProps {
   title: string;
@@ -16,14 +18,14 @@ const Podcast: React.FC<PodcastProps> = ({
 
   return (
     <StyledPodcast data-testid="podcast" onClick={() => navigate(`/podcast/${podcastId}`)}>
-      <StyledImage><img src={image} style={{ borderRadius: '50%', display: 'block', margin: 'auto' }} alt={image} /></StyledImage>
+      <StyledImageBox><StyledImage src={image} alt={image} /></StyledImageBox>
       <StyledText>
-        <div style={{ marginBottom: '10px' }}>{title}</div>
-        <div style={{ fontWeight: '500', color: '#808080' }}>
+        <StyledTitle>{title}</StyledTitle>
+        <StyledAuthor>
           Author:
           {' '}
           {artist}
-        </div>
+        </StyledAuthor>
       </StyledText>
     </StyledPodcast>
   );

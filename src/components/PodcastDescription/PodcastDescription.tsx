@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StyledImage,
+  StyledImageBox, StyledImage,
 } from './PodcastDescription.styled';
 import {
   StyledBox, StyledText, StyledAuthor, StyledDescription, Delimiter,
@@ -17,7 +17,7 @@ const PodcastDescription: React.FC<PodcastProps> = ({
   title, artist, image, description,
 }) => (
   <StyledBox width="300px">
-    <StyledImage><img src={image} style={{ borderRadius: '5%', display: 'block', margin: 'auto' }} alt={image} /></StyledImage>
+    <StyledImageBox><StyledImage src={image} alt={image} /></StyledImageBox>
     <Delimiter />
     <StyledText>{title}</StyledText>
     <StyledAuthor>
