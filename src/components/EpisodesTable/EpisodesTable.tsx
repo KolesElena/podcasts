@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { convertDate, millisToMinutesAndSeconds } from '../../utils';
+import { FlexBox } from '../../main.styled';
 import {
-  StyledEpisodesCounter, StyledTable, StyledHead, StyledRow, StyledCell,
+  StyledEpisodesCounter, StyledTable, StyledHead, StyledRow, StyledCell, TextPadding,
 } from './EpisodesTable.styled';
 import { EpisodeData } from '../../types';
 
@@ -26,9 +27,9 @@ const EpisodesTable: React.FC<EpisodeData> = ({
     }];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <FlexBox flexdirection="column">
       <StyledEpisodesCounter>
-        <span style={{ paddingLeft: '1em' }}>Episodes:</span>
+        <TextPadding>Episodes:</TextPadding>
         {' '}
         {Number(episodes?.resultCount) - 1}
       </StyledEpisodesCounter>
@@ -52,7 +53,7 @@ const EpisodesTable: React.FC<EpisodeData> = ({
           ))}
         </tbody>
       </StyledTable>
-    </div>
+    </FlexBox>
   );
 };
 

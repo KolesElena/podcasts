@@ -38,3 +38,7 @@ export const StyledCell = styled.td`
   }
   padding: 0.5em 1em;
 `;
+
+export const TextPadding = styled.span`
+  padding-left: 1em;
+`;

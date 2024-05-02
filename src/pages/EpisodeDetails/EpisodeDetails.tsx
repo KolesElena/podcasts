@@ -8,7 +8,7 @@ import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { StyledEpisodeDetails } from './EpisodeDetails.styled';
 import { getPodcastDetails } from '../../api';
 import EpisodeDescription from '../../components/EpisodeDescription/EpisodeDescription';
-import { FlexBox, Loader } from '../../main.styled';
+import { FlexBox, Loader, Delimiter } from '../../main.styled';
 import { Episodes } from '../../types';
 
 const EpisodeDetails: React.FC = () => {
@@ -30,7 +30,7 @@ const EpisodeDetails: React.FC = () => {
         <Breadcrumb />
         {isFetchingDetails && <Loader />}
       </FlexBox>
-      <hr style={{ margin: ' 0px 30px' }} />
+      <Delimiter margin="0 1em" />
       {!isFetchingDetails && episodesData && (
         <StyledEpisodeDetails>
           <PodcastDescription

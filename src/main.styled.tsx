@@ -35,11 +35,12 @@ export const Loader = styled.div`
   border: 5px solid #A7C7E7;
 `;
 
-export const FlexBox = styled.div<{ justifycontent: string }>`
+export const FlexBox = styled.div<{ justifycontent?: string, flexdirection?: string }>`
   display: flex;
   justify-content: ${(props) => props.justifycontent};
   margin: 30px 30px 10px;
   align-items: center;
+  flex-direction: ${(props) => props.flexdirection};
 `;
 
 export const Delimiter = styled.hr<{ margin?: string }>`

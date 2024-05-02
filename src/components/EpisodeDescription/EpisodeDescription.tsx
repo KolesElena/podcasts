@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
+import { StyledAudio } from './EpisodeDescription.styled';
 import { StyledBox, StyledText, StyledDescription } from '../../main.styled';
 
 interface PodcastProps {
@@ -16,11 +17,12 @@ const EpisodeDescription: React.FC<PodcastProps> = ({
     <StyledDescription>
       {description}
     </StyledDescription>
-    <ReactAudioPlayer
-      style={{ width: '100%' }}
-      src={url}
-      controls
-    />
+    <StyledAudio>
+      <ReactAudioPlayer
+        src={url}
+        controls
+      />
+    </StyledAudio>
   </StyledBox>
 );
 
