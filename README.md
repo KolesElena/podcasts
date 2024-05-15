@@ -2,6 +2,9 @@ This is a Podcaster project created with React js/Typescript.
 
 ## Available Scripts
 
+### `npm install`
+It will install all the dependencies needed to start the project
+
 ### `npm run start`
 It will run the app in the development mode.\
 Open [http://localhost:3000] to view it in the browser.
