@@ -3,8 +3,8 @@ import {
   render, screen, fireEvent, waitFor,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import PodcastsList from '../pages/PodcastsList/PodcastsList';
-import { Context } from '../context/Context';
+import PodcastsList from './PodcastsList';
+import { Context } from '../../context/Context';
 
 const mockContextData = {
   data: [

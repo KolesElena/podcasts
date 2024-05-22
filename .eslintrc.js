@@ -41,5 +41,6 @@ module.exports = {
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
     'function-paren-newline': ['error', 'consistent'],
     'function-call-argument-newline': ['error', 'consistent'],
+    'react/function-component-definition': 0,
   },
 };
