@@ -5,7 +5,9 @@ import { StyledPodcasts, StyledCounter } from './PodcastsList.styled';
 import Breadcrumb from '../../components/Breadcrumb/Breadcrumb';
 import { Context } from '../../context/Context';
 import { PodcastListData } from '../../types';
-import { FlexBox, Loader, Delimiter } from '../../main.styled';
+import {
+  FlexBox, Loader, Delimiter,
+} from '../../main.styled';
 
 const PodcastsList: React.FC = () => {
   const { data, isFetching } = useContext(Context);
