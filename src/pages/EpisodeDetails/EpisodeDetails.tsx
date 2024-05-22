@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useQuery, UseQueryResult } from 'react-query';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import { Context } from '../../context/Context';
 
 import PodcastDescription from '../../components/PodcastDescription/PodcastDescription';
